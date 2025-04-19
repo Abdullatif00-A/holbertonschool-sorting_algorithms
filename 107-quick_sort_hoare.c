@@ -2,45 +2,42 @@
 #include <stdio.h>
 
 /**
- * swap - Swap two elements in an array
- * @a: Pointer to first element
- * @b: Pointer to second element
+ * swap - Swap two integers in an array
+ * @a: First integer
+ * @b: Second integer
  */
 void swap(int *a, int *b)
 {
-	int tmp;
-
 	if (a != b)
 	{
-		tmp = *a;
+		int tmp = *a;
 		*a = *b;
 		*b = tmp;
 	}
 }
 
 /**
- * hoare_partition - Hoare partition scheme for Quick Sort
- * @array: Array to sort
- * @low: Lowest index
- * @high: Highest index
+ * hoare_partition - Partitions the array using Hoare's scheme
+ * @array: The array to sort
+ * @low: Start index
+ * @high: End index
  * @size: Size of the array
- * Return: Final partition index
+ * Return: The partition index
  */
 int hoare_partition(int *array, int low, int high, size_t size)
 {
 	int pivot = array[high];
-	int i = low - 1;
-	int j = high + 1;
+	int i = low - 1, j = high + 1;
 
 	while (1)
 	{
 		do {
 			i++;
-		} while (i <= high && array[i] < pivot);
+		} while (array[i] < pivot);
 
 		do {
 			j--;
-		} while (j >= low && array[j] > pivot);
+		} while (array[j] > pivot);
 
 		if (i >= j)
 			return (j);
@@ -51,11 +48,11 @@ int hoare_partition(int *array, int low, int high, size_t size)
 }
 
 /**
- * quicksort_hoare - Recursive quicksort with Hoare partition
+ * quicksort_hoare - Recursively sorts array using Hoare's scheme
  * @array: Array to sort
  * @low: Start index
  * @high: End index
- * @size: Array size
+ * @size: Size of the array
  */
 void quicksort_hoare(int *array, int low, int high, size_t size)
 {
@@ -70,15 +67,15 @@ void quicksort_hoare(int *array, int low, int high, size_t size)
 }
 
 /**
- * quick_sort_hoare - Sort array using Quick sort with Hoare scheme
+ * quick_sort_hoare - Entry function for quick sort with Hoare partition
  * @array: Array to sort
  * @size: Size of the array
  */
 void quick_sort_hoare(int *array, size_t size)
 {
-	if (!array || size < 2)
+	if (array == NULL || size < 2)
 		return;
 
-	quicksort_hoare(array, 0, size - 1, size);
+	quicksort_hoare(array, 0, (int)size - 1, size);
 }
 
