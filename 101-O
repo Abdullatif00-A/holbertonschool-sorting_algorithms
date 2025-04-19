@@ -1,4 +1,4 @@
-O(n)      # Best case
-O(n^2)    # Average case
-O(n^2)    # Worst case
+O(n)      // Best case: already sorted, only one pass through the list
+O(n^2)    // Average case: multiple swaps in both directions
+O(n^2)    // Worst case: reverse sorted, requires full iteration forward and backward repeatedly
 
