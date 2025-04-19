@@ -11,14 +11,12 @@ void swap(int *a, int *b, int *array, size_t size)
 {
 	int temp;
 
-	if (*a != *b)
-	{
-		temp = *a;
-		*a = *b;
-		*b = temp;
-		print_array(array, size);
-	}
+	temp = *a;
+	*a = *b;
+	*b = temp;
+	print_array(array, size);
 }
+
 
 /**
  * heapify - Maintains the max heap property.
