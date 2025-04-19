@@ -2,26 +2,29 @@
 #include <stdio.h>
 
 /**
- * swap - Swaps two integers in an array
- * @a: First integer
- * @b: Second integer
+ * swap - Swap two elements in an array
+ * @a: Pointer to first element
+ * @b: Pointer to second element
  */
 void swap(int *a, int *b)
 {
 	int tmp;
 
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+	if (a != b)
+	{
+		tmp = *a;
+		*a = *b;
+		*b = tmp;
+	}
 }
 
 /**
- * hoare_partition - Partitions the array using Hoare’s scheme
- * @array: The array to partition
- * @low: Starting index
- * @high: Ending index
- * @size: Array size (for printing)
- * Return: Index for the next recursive call
+ * hoare_partition - Hoare partition scheme for Quick Sort
+ * @array: Array to sort
+ * @low: Lowest index
+ * @high: Highest index
+ * @size: Size of the array
+ * Return: Final partition index
  */
 int hoare_partition(int *array, int low, int high, size_t size)
 {
@@ -33,45 +36,42 @@ int hoare_partition(int *array, int low, int high, size_t size)
 	{
 		do {
 			i++;
-		} while (array[i] < pivot);
+		} while (i <= high && array[i] < pivot);
 
 		do {
 			j--;
-		} while (array[j] > pivot);
+		} while (j >= low && array[j] > pivot);
 
 		if (i >= j)
 			return (j);
 
-		if (array[i] != array[j])
-		{
-			swap(&array[i], &array[j]);
-			print_array(array, size);
-		}
+		swap(&array[i], &array[j]);
+		print_array(array, size);
 	}
 }
 
 /**
- * quick_sort_hoare_rec - Recursive function for quicksort
- * @array: The array to sort
- * @low: Starting index
- * @high: Ending index
- * @size: Size of the array
+ * quicksort_hoare - Recursive quicksort with Hoare partition
+ * @array: Array to sort
+ * @low: Start index
+ * @high: End index
+ * @size: Array size
  */
-void quick_sort_hoare_rec(int *array, int low, int high, size_t size)
+void quicksort_hoare(int *array, int low, int high, size_t size)
 {
-	int pivot;
+	int p;
 
 	if (low < high)
 	{
-		pivot = hoare_partition(array, low, high, size);
-		quick_sort_hoare_rec(array, low, pivot, size);
-		quick_sort_hoare_rec(array, pivot + 1, high, size);
+		p = hoare_partition(array, low, high, size);
+		quicksort_hoare(array, low, p, size);
+		quicksort_hoare(array, p + 1, high, size);
 	}
 }
 
 /**
- * quick_sort_hoare - Sorts an array using quick sort with Hoare scheme
- * @array: The array to sort
+ * quick_sort_hoare - Sort array using Quick sort with Hoare scheme
+ * @array: Array to sort
  * @size: Size of the array
  */
 void quick_sort_hoare(int *array, size_t size)
@@ -79,6 +79,6 @@ void quick_sort_hoare(int *array, size_t size)
 	if (!array || size < 2)
 		return;
 
-	quick_sort_hoare_rec(array, 0, size - 1, size);
+	quicksort_hoare(array, 0, size - 1, size);
 }
 
