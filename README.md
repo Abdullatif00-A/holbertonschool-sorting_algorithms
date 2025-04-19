@@ -1,35 +1,151 @@
-#Sorting Algorithms & Big O  
+# Sorting Algorithms & Big O
 
-### General  
-The goal of this project are as follows:  
+## 📚 Project Overview
 
-- Writing at least four different sorting algorithms
-- What is the Big O notation and how o evaluate the  
-  time complexity of an algorithm
-- How to select the best sorting algorithm
-- What is a stable algorithm  
+This project focuses on implementing various sorting algorithms in C and analyzing their time complexity using Big O notation. It explores both simple and advanced algorithms, applied to arrays and doubly linked lists. The goal is to understand algorithmic efficiency, stability, and adaptability for different types of data and constraints.
 
-### Requirments  
+Pair programming is encouraged for collaborative learning and better problem-solving.
 
-- Allowed editors: vi, vim, emacs    
-- All your files will be compiled on Ubuntu 14.04 LTS
-- Your programs and functions will be compiled with gcc 4.8.4  
-  using the flags -Wall -Werror -Wextra and -pedantic
-- All your files should end with a new line
-- A README.md file, at the root of the folder of the project, is mandatory
-- Your code should use the Betty style. It will be checked using 
-  betty-style.pl and betty-doc.pl
-- You are not allowed to use global variables
-- No more than 5 functions per file
-- Unless specified otherwise, you are not allowed to use the standard  
-  library. Any use of functions like printf, puts, … is totally forbidden.  
-- In the following examples, the main.c files are shown as examples. You  
-  can use them to test your functions, but you don’t have to push them to  
-  your repo (if you do we won’t take them into account). We will use our own   
-  main.c files at compilation. Our main.c files might be different from the   
-  one shown in the examples  
-- The prototypes of all your functions should be included in your header  
-  file called sort.h  
-- Don’t forget to push your header file  
-- All your header files should be include guarded  
-- A list/array does not need to be sorted if its size is less than 2.  
+---
+
+## ✨ Learning Objectives
+
+- Understand and implement at least 4 sorting algorithms  
+- Master the concept of Big O notation  
+- Evaluate and compare the time complexity of sorting algorithms  
+- Select the most efficient algorithm based on input data characteristics  
+- Understand stable vs unstable sorting  
+- Manipulate data in arrays and doubly linked lists  
+- Handle advanced sorting scenarios such as deck sorting and radix-based approaches  
+
+---
+
+## ✅ Project Requirements
+
+- **Language:** C (GNU89 standard)  
+- **Compilation:** `gcc -Wall -Wextra -Werror -pedantic`  
+- **Code Style:** Betty style  
+- No global variables allowed  
+- Max 5 functions per file  
+- No use of standard library functions unless specified (e.g. `qsort` in Task 12)  
+- All files must end with a new line  
+- Header guards and prototypes must be included in `sort.h` and `deck.h`  
+- A `README.md` file is mandatory  
+
+---
+
+## 🧠 Core Algorithms Implemented
+
+| Task | Algorithm                         | File                          |
+|------|-----------------------------------|-------------------------------|
+| 0    | Bubble Sort                       | `0-bubble_sort.c`             |
+| 1    | Insertion Sort (doubly linked)    | `1-insertion_sort_list.c`     |
+| 2    | Selection Sort                    | `2-selection_sort.c`          |
+| 3    | Quick Sort (Lomuto)               | `3-quick_sort.c`              |
+| 4    | Shell Sort (Knuth sequence)       | `100-shell_sort.c`            |
+| 5    | Cocktail Shaker Sort              | `101-cocktail_sort_list.c`    |
+| 6    | Counting Sort                     | `102-counting_sort.c`         |
+| 7    | Merge Sort                        | `103-merge_sort.c`            |
+| 8    | Heap Sort                         | `104-heap_sort.c`             |
+| 9    | Radix Sort                        | `105-radix_sort.c`            |
+| 10   | Bitonic Sort                      | `106-bitonic_sort.c`          |
+| 11   | Quick Sort (Hoare partition)      | `107-quick_sort_hoare.c`      |
+| 12   | Deck Sort (doubly linked deck)    | `1000-sort_deck.c`            |
+
+---
+
+## 🧾 Data Structures
+
+### Doubly Linked List Node
+
+```c
+typedef struct listint_s
+{
+    const int n;
+    struct listint_s *prev;
+    struct listint_s *next;
+} listint_t;
+```
+
+### Deck of Cards
+
+```c
+typedef enum kind_e
+{
+    SPADE = 0,
+    HEART,
+    CLUB,
+    DIAMOND
+} kind_t;
+
+typedef struct card_s
+{
+    const char *value;
+    const kind_t kind;
+} card_t;
+
+typedef struct deck_node_s
+{
+    const card_t *card;
+    struct deck_node_s *prev;
+    struct deck_node_s *next;
+} deck_node_t;
+```
+
+---
+
+## 🧪 Testing
+
+- Use the provided `main.c` files for each task to test functionality.
+- For performance testing, generate large datasets using random.org or custom scripts.
+- Test edge cases (empty array, 1-element array, already sorted data, etc.).
+- For linked list tasks, ensure memory integrity after sorting.
+
+---
+
+## 📊 Big O Complexity Reference
+
+Each algorithm has a corresponding `.O` file (e.g. `0-O`, `1-O`, ...) listing its complexity:
+
+- Best Case
+- Average Case
+- Worst Case
+
+### 📌 Use the correct notation:
+
+- `O(1)`
+- `O(n)`
+- `O(n^2)`
+- `O(log(n))`
+- `O(nlog(n))`
+
+✳️ Avoid constants and never write something like O(2n) — use short notation like O(n).
+
+---
+
+## 📝 Tasks
+
+### ✔️ Mandatory Tasks
+
+- `0-bubble_sort.c` — Bubble sort with printed swaps  
+- `1-insertion_sort_list.c` — Insertion sort on a doubly linked list  
+- `2-selection_sort.c` — Selection sort with printed swaps  
+- `3-quick_sort.c` — Quick sort using Lomuto partition  
+
+### ✔️ Advanced Tasks
+
+- `100-shell_sort.c` — Shell sort using Knuth sequence  
+- `101-cocktail_sort_list.c` — Cocktail shaker sort on a doubly linked list  
+- `102-counting_sort.c` — Counting sort with printed counting array  
+- `103-merge_sort.c` — Merge sort with printed merge steps  
+- `104-heap_sort.c` — Heap sort using sift-down method  
+- `105-radix_sort.c` — LSD radix sort with step prints  
+- `106-bitonic_sort.c` — Bitonic sort with debug logs  
+- `107-quick_sort_hoare.c` — Quick sort using Hoare partition scheme  
+- `1000-sort_deck.c` — Sorts a deck of cards (doubly linked list of structs)  
+
+---
+
+## 🧑‍💻 Authors
+
+Abdullatif Alzaher, Donna Almadani.
